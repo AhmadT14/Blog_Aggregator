@@ -5,7 +5,16 @@ import path from "path";
 type Config = { dbUrl: string; currentUserName: string };
 
 export function setUser(user_name: string): void {
-  writeConfig({ dbUrl: "postgres://example", currentUserName: user_name });
+  let currentConfig: Config;
+  try {
+    currentConfig = readConfig();
+  } catch (error) {
+    currentConfig = {
+      dbUrl: "postgres://postgres:1412@localhost:5432/blog_aggregator?sslmode=disable",
+      currentUserName: user_name
+    };
+  }
+  writeConfig({ ...currentConfig, currentUserName: user_name });
 }
 export function readConfig(): Config {
   try {
@@ -21,7 +30,7 @@ function getConfigFilePath(): string {
   return path.join(os.homedir(), "/.gatorconfig.json");
 }
 function writeConfig(cfg: Config): void {
-  fs.writeFileSync(getConfigFilePath(), JSON.stringify(cfg));
+  fs.writeFileSync(getConfigFilePath(), JSON.stringify(cfg, null, 2));
 }
 function validateConfig(rawConfig: any): Config {
   if (typeof rawConfig !== "object" || rawConfig === null) {
