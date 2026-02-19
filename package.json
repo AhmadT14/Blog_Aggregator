@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-      "start": "tsx ./src/index.ts"
+    "start": "tsx ./src/index.ts",
+    "generate": "drizzle-kit generate",
+    "migrate": "drizzle-kit migrate"
   },
   "keywords": [],
   "author": "",
@@ -11,8 +13,16 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^25.2.3",
+    "@types/pg": "^8.16.0",
+    "drizzle-kit": "^0.31.9",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "drizzle-orm": "^0.45.1",
+    "pg": "^8.18.0",
+    "postgres": "^3.4.8"
   }
+}
