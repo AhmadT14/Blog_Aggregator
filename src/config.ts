@@ -3,6 +3,8 @@ import os from "os";
 import path from "path";
 
 type Config = { dbUrl: string; currentUserName: string };
+export type CommandHandler = (cmdName: string, ...args: string[]) => Promise<void>;
+export type CommandsRegistry = {[name: string]: CommandHandler};
 
 export function setUser(user_name: string): void {
   let currentConfig: Config;
@@ -46,4 +48,16 @@ function validateConfig(rawConfig: any): Config {
   } else {
     return rawConfig as Config;
   }
+}
+
+export function registerCommand(registry: CommandsRegistry, cmdName: string, handler: CommandHandler){
+    registry[cmdName] = handler;
+}
+export async function runCommand(registry: CommandsRegistry, cmdName: string, ...args: string[]){
+    const handler = registry[cmdName];
+    if(handler){
+        await handler(cmdName, ...args);
+    } else {
+        throw new Error("Command not found: " + cmdName);
+    }
 }

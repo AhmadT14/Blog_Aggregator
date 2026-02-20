@@ -1,7 +1,7 @@
 import { readConfig } from "src/config";
 import { db } from "..";
 import { feeds, users } from "../schema";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 export async function createFeed(name: string, url: string) {
     const config = readConfig()
@@ -13,4 +13,12 @@ export async function createFeed(name: string, url: string) {
 export async function getfeeds() {
     const result = await db.select().from(feeds);
     return result;
+}
+export async function markFeedFetched(feedId: string) {
+    const result = await db.update(feeds).set({ last_fetched_at: new Date(), updatedAt: new Date() }).where(eq(feeds.id, feedId)).returning();
+    return result;
+}
+export async function getNextFeedToFetch() {
+    const feed = await db.select().from(feeds).orderBy(sql`${feeds.last_fetched_at} DESC NULLS FIRST`).limit(1);
+    return feed[0];
 }

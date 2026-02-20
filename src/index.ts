@@ -1,17 +1,17 @@
-import { registerCommand, runCommand } from "./configCommands";
-import {CommandsRegistry} from "./configCommands";
-import { handlerLogin } from "./loginCommand";
+import { registerCommand, runCommand, CommandsRegistry} from "./config";
+import { handlerLogin } from "./command/loginCommand";
 import { argv } from "node:process";
-import { handlerRegister } from "./registerCommand";
-import { handlerReset } from "./resetCommand";
-import { handlerUsers } from "./usersCommand";
-import { handleragg } from "./aggCommand";
-import { handleraddfeed } from "./addfeedCommand";
-import { handlerfeeds } from "./feedsCommand";
-import { handlerfollow } from "./followCommand";
-import { handlerfollowing } from "./followingCommand";
-import { handlerunfollow } from "./unfollowCommand";
+import { handlerRegister } from "./command/registerCommand";
+import { handlerReset } from "./command/resetCommand";
+import { handlerUsers } from "./command/usersCommand";
+import { handleragg } from "./command/aggCommand";
+import { handleraddfeed } from "./command/addfeedCommand";
+import { handlerfeeds } from "./command/feedsCommand";
+import { handlerfollow } from "./command/followCommand";
+import { handlerfollowing } from "./command/followingCommand";
+import { handlerunfollow } from "./command/unfollowCommand";
 import { middlewareLoggedIn } from "./middleware";
+import { handlerBrowse } from "./command/browseCommand";
 
 async function main() {
   const commandsRegistry: CommandsRegistry = {};
@@ -25,6 +25,7 @@ async function main() {
   registerCommand(commandsRegistry, "follow", middlewareLoggedIn(handlerfollow));
   registerCommand(commandsRegistry, "following", middlewareLoggedIn(handlerfollowing));
   registerCommand(commandsRegistry, "unfollow", middlewareLoggedIn(handlerunfollow));
+  registerCommand(commandsRegistry, "browse", middlewareLoggedIn(handlerBrowse));
 
   if (argv.length > 2) {
     await runCommand(commandsRegistry, argv[2], ...argv.slice(3));

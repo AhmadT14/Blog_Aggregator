@@ -1,5 +1,5 @@
-import { getfeeds } from "./lib/db/queries/feeds";
-import { getUsers } from "./lib/db/queries/users";
+import { getfeeds } from "../lib/db/queries/feeds";
+import { getUsers } from "../lib/db/queries/users";
 
 export async function handlerfeeds(cmdName: string, ...args: string[]) {
   const feeds = await getfeeds();
