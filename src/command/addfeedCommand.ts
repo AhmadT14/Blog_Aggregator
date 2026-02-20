@@ -1,6 +1,6 @@
-import { feeds, users } from "./lib/db/schema";
-import { createFeed } from "./lib/db/queries/feeds";
-import { createFeedFollow } from "./lib/db/queries/feedFollow";
+import { feeds, users } from "../lib/db/schema";
+import { createFeed } from "../lib/db/queries/feeds";
+import { createFeedFollow } from "../lib/db/queries/feedFollow";
 import { User } from "./usersCommand";
 export async function printFeed(feed: typeof feeds, user: typeof users) {
 console.log(feed, user)

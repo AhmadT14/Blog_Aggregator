@@ -22,6 +22,20 @@
       "when": 1771578081374,
       "tag": "0002_little_silver_samurai",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1771622641111,
+      "tag": "0003_small_exodus",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1771624095409,
+      "tag": "0004_thankful_nemesis",
+      "breakpoints": true
     }
   ]
 }

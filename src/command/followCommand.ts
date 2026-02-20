@@ -1,4 +1,4 @@
-import { createFeedFollow, feedByUrl } from "./lib/db/queries/feedFollow";
+import { createFeedFollow, feedByUrl } from "../lib/db/queries/feedFollow";
 import { User } from "./usersCommand";
 
 
