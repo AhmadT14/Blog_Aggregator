@@ -8,15 +8,21 @@ export type CommandsRegistry = {[name: string]: CommandHandler};
 
 export function setUser(user_name: string): void {
   let currentConfig: Config;
+
   try {
     currentConfig = readConfig();
   } catch (error) {
+    const dbUrl = process.env.DATABASE_URL;
+
+    if (!dbUrl) {
+      throw new Error("DATABASE_URL is not set");
+    }
+
     currentConfig = {
-      dbUrl: "REMOVED",
+      dbUrl,
       currentUserName: user_name
     };
   }
-  writeConfig({ ...currentConfig, currentUserName: user_name });
 }
 export function readConfig(): Config {
   try {
