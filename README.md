@@ -2,6 +2,10 @@
 
 A command-line application for aggregating and managing RSS feeds from blogs and news sources. Users can register, add feeds, follow feeds from other users, and browse posts from their followed feeds.
 
+## Acknowledgments
+
+This project was developed as part of the [Boot.dev](https://boot.dev) backend development journey and was guided throughout the learning process.
+
 ## Features
 
 - **User Management**: Register users and switch between different user profiles
